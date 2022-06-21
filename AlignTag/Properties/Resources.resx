@@ -121,4 +121,43 @@
   <data name="AlignHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AlignHelp.chm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="align_bottom_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\align-bottom-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="align_center_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\align-center-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="align_icon_grey_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\align-icon-grey-background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="align_icon_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\align-icon-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="align_left_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\align-left-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="align_middle_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\align-middle-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="align_right_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\align-right-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="align_top_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\align-top-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrange_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrange-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="distribute_horizontally_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\distribute-horizontally-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="distribute_vertically_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\distribute-vertically-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="untangle_horizontally_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\untangle-horizontally-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="untangle_vertically_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\untangle-vertically-large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

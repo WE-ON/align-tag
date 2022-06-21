@@ -15,10 +15,10 @@ namespace AlignTag
     public class Align
     {
         private UIDocument UIdoc;
-        public Result AlignElements(ExternalCommandData commandData, ref string message, AlignType alignType)
+        public void AlignElements(UIApplication uiapp, AlignType alignType)
         {
             // Get the handle of current document.
-            UIdoc = commandData.Application.ActiveUIDocument;
+            UIdoc = uiapp.ActiveUIDocument;
             Document document = UIdoc.Document;
 
             using (TransactionGroup txg = new TransactionGroup(document))
@@ -44,9 +44,6 @@ namespace AlignTag
                     if (empty) selectedIds = new List<ElementId> { ElementId.InvalidElementId };
 
                     UIdoc.Selection.SetElementIds(selectedIds);
-
-                    // Return Success
-                    return Result.Succeeded;
                 }
 
                 catch (Autodesk.Revit.Exceptions.OperationCanceledException exceptionCanceled)
@@ -56,32 +53,36 @@ namespace AlignTag
                     {
                         txg.RollBack();
                     }
-                    return Result.Cancelled;
                 }
                 catch (ErrorMessageException errorEx)
                 {
                     // checked exception need to show in error messagebox
-                    message = errorEx.Message;
+                    //message = errorEx.Message;
                     if (txg.HasStarted())
                     {
                         txg.RollBack();
                     }
-                    return Result.Failed;
-                }
+                    var message = errorEx.Message;
+                    var td = new TaskDialog("AlignTag Exception");
+                    td.MainInstruction = message;
+                    td.Show();
+                  }
                 catch (Exception ex)
                 {
                     // unchecked exception cause command failed
-                    message = ex.Message;
+                    //message = ex.Message;
                     //Trace.WriteLine(ex.ToString());
                     if (txg.HasStarted())
                     {
                         txg.RollBack();
                     }
-                    return Result.Failed;
+                    var message = ex.Message;
+                    var td = new TaskDialog("AlignTag Exception");
+                    td.MainInstruction = message;
+                    td.Show();
                 }
             }
         }
-
 
         public void AlignTag(AlignType alignType, TransactionGroup txg, ICollection<ElementId> selectedIds, Document document)
         {
@@ -112,7 +113,7 @@ namespace AlignTag
 
                 if (annotationElements.Count > 1)
                 {
-                    // AlignAnnotationElements(annotationElements, alignType, document);
+                    AlignAnnotationElements(annotationElements, alignType, document);
                 }
 
                 Debug.WriteLine(DateTime.Now.ToString() + " - Commit align tags");

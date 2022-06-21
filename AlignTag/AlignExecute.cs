@@ -9,126 +9,18 @@ using Autodesk.Revit.DB.Architecture;
 using System.Globalization;
 using System.Resources;
 
-namespace AlignTag
+namespace AlignTag.Model
 {
-    [Transaction(TransactionMode.Manual)]
-    class AlignLeft : IExternalCommand
+  using MainWindow;
+  [Transaction(TransactionMode.Manual)]
+  class AlignTag : IExternalEventHandler
+  {
+    public string GetName() => nameof(AlignTag);
+    public void Execute(UIApplication uiapp)
     {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.Left);
-        }
+      var mainWindowViewModel = new MainWindowViewModel(uiapp, new RevitEvent());
+      MainView mainWindow = new MainView(mainWindowViewModel);
+      mainWindow.Show();
     }
-
-    [Transaction(TransactionMode.Manual)]
-    class AlignRight : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.Right);
-        }
-    }
-
-    [Transaction(TransactionMode.Manual)]
-    class AlignTop : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.Up);
-        }
-    }
-
-    [Transaction(TransactionMode.Manual)]
-    class AlignBottom : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.Down);
-        }
-    }
-
-    [Transaction(TransactionMode.Manual)]
-    class AlignCenter : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.Center);
-        }
-    }
-
-    [Transaction(TransactionMode.Manual)]
-    class AlignMiddle : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.Middle);
-        }
-    }
-
-    [Transaction(TransactionMode.Manual)]
-    class DistributeHorizontally : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.Horizontally);
-        }
-    }
-
-    [Transaction(TransactionMode.Manual)]
-    class DistributeVertically : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.Vertically);
-        }
-    }
-
-    [Transaction(TransactionMode.Manual)]
-    class UntangleVertically : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.UntangleVertically);
-        }
-    }
-
-    [Transaction(TransactionMode.Manual)]
-    class UntangleHorizontally : IExternalCommand
-    {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            Align align = new Align();
-
-            return align.AlignElements(commandData, ref message, AlignType.UntangleHorizontally);
-        }
-    }
-
-    //[Transaction(TransactionMode.Manual)]
-    //class Arrange : IExternalCommand
-    //{
-    //    public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
-    //    {
-    //        Arrange arrange = new Arrange();
-
-    //        return arrange.ArrangeElements(commandData, ref message);
-    //    }
-    //}
+  }
 }

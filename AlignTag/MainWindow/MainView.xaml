@@ -1,0 +1,179 @@
+﻿<Window x:Class="AlignTag.MainWindow.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             WindowStyle="None"
+             AllowsTransparency="True"
+             d:DesignHeight="155" d:DesignWidth="100"
+             ResizeMode="CanResize"
+             SizeToContent="WidthAndHeight"  
+             Width="100"
+             Height="155" 
+             MinWidth="100" 
+             MaxWidth="100" 
+             MinHeight="155" 
+             MaxHeight="155"
+             MouseDown="Window_MouseDown"
+             Topmost="True"
+        >
+  <Border Visibility="Visible" 
+          Background="Transparent" 
+          BorderThickness="2" 
+          BorderBrush="Gray" 
+          CornerRadius="4"
+          >
+
+    <Border.OpacityMask>
+      <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="Black"/>
+        <GradientStop Color="White" Offset="1"/>
+      </LinearGradientBrush>
+    </Border.OpacityMask>
+    <Grid Background="Transparent" Margin="2,22,2,2">
+      <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition/>
+        <RowDefinition/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="30.667"/>
+      </Grid.ColumnDefinitions>
+      <Button Click="ButtonClickExit" 
+              Cursor="Hand" 
+              Content="X" 
+              Margin="2,-21,2,0" 
+              VerticalAlignment="Top" 
+              FontSize="8" 
+              Height="20" 
+              FontStretch="Normal" 
+              FontFamily="Calibri" Grid.Column="2"/>
+      
+      <Button Click="alignLeftButton" Margin="2,2,2,2" 
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Align Tags or Elements Left" 
+              >
+        <Button.Background>
+          <ImageBrush
+            ImageSource
+            ="pack://application:,,,/AlignTag;component/Resources/align-left-large.png"/>
+        </Button.Background>
+      </Button>
+      
+      <Button Click="alignRightButton" Margin="2,2,2,2" Grid.Column="1"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Align Tags or Elements Right" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/align-right-large.png"/>
+        </Button.Background>
+      </Button>
+      
+      <Button Click="alignTopButton" Margin="2,2,2,2" Grid.Column="2"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Align Tags or Elements Top" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/align-top-large.png"/>
+        </Button.Background>
+      </Button>
+      
+      <Button Click="alignBottomButton" Margin="2,2,2,2" Grid.Row="1"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Align Tags or Elements Bottom" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/align-bottom-large.png"/>
+        </Button.Background>
+      </Button>
+      <Button Click="alignCenterButton" Margin="2,2,2,2" Grid.Column="1" Grid.Row="1"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Align Tags or Elements Center" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/align-center-large.png"/>
+        </Button.Background>
+      </Button>
+      
+      <Button Click="alignMiddleButton" Margin="2,2,2,2" Grid.Column="2" Grid.Row="1"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Align Tags or Elements Middle" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/align-middle-large.png"/>
+        </Button.Background>
+      </Button>
+      
+      <Button Click="distributeHorizontallyButton" Margin="2,2,2,2" Grid.Row="2"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Distribute Tags or Elements Horizontally" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/distribute-horizontally-large.png"/>
+        </Button.Background>
+      </Button>
+      
+      <Button Click="distributeVerticallyButton" Margin="2,2,2,2" Grid.Column="1" Grid.Row="2"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Distribute Tags or Elements Vertically" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/distribute-vertically-large.png"/>
+        </Button.Background>
+      </Button>
+      
+      <Button Click="ArrangeButton" Margin="2,2,2,2" Grid.Column="2" Grid.Row="2"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Arrange Tags around the view" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/arrange-large.png"/>
+        </Button.Background>
+      </Button>
+      
+      <Button Click="UntangleVerticallyButton" Margin="2,2,2,2" Grid.Row="3"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Вертикально распутать теги или элементы" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/untangle-vertically-large.png"/>
+        </Button.Background>
+      </Button>
+
+      <Button Click="UntangleHorizontallyButton" 
+              Margin="2,2,2,2" Grid.Column="1" 
+              Grid.Row="3"
+        ToolTipService.InitialShowDelay="500" 
+        ToolTip="Распутать по горизонтали теги или элементы" 
+        >
+        <Button.Background>
+          <ImageBrush
+              ImageSource
+              ="pack://application:,,,/AlignTag;component/Resources/untangle-horizontally-large.png"/>
+        </Button.Background>
+      </Button>
+    </Grid>
+  </Border>
+</Window>

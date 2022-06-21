@@ -9,12 +9,11 @@ using Autodesk.Revit.Attributes;
 
 namespace AlignTag
 {
-    [Transaction(TransactionMode.Manual)]
-    class Arrange : IExternalCommand
+    class Arrange
     {
-        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
+        public void ArrangeElements(UIApplication uiapp)
         {
-            UIDocument UIdoc = commandData.Application.ActiveUIDocument;
+            UIDocument UIdoc = uiapp.ActiveUIDocument;
             Document doc = UIdoc.Document;
             using (TransactionGroup transGroup = new TransactionGroup(doc))
             {
@@ -27,40 +26,36 @@ namespace AlignTag
                         // Add Your Code Here
                         ArrangeTag(UIdoc, tx);
                         transGroup.Assimilate();
-                        // Return Success
-                        return Result.Succeeded;
-
                     }
 
                     catch (Autodesk.Revit.Exceptions.OperationCanceledException exceptionCanceled)
                     {
-                        message = exceptionCanceled.Message;
                         if (tx.HasStarted())
                         {
                             tx.RollBack();
                         }
-                        return Autodesk.Revit.UI.Result.Cancelled;
                     }
                     catch (ErrorMessageException errorEx)
                     {
-                        // checked exception need to show in error messagebox
-                        message = errorEx.Message;
-                        if (tx.HasStarted())
+                      var message = errorEx.Message;
+                      var td = new TaskDialog("AlignTag Exception");
+                      td.MainInstruction = message;
+                      td.Show();
+                      if (tx.HasStarted())
                         {
                             tx.RollBack();
                         }
-                        return Autodesk.Revit.UI.Result.Failed;
                     }
                     catch (Exception ex)
                     {
-                        // unchecked exception cause command failed
-                        message = ex.Message;
-                        //Trace.WriteLine(ex.ToString());
-                        if (tx.HasStarted())
+                      var message = ex.Message;
+                      var td = new TaskDialog("AlignTag Exception");
+                      td.MainInstruction = message;
+                      td.Show();
+                      if (tx.HasStarted())
                         {
                             tx.RollBack();
                         }
-                        return Autodesk.Revit.UI.Result.Failed;
                     }
                 }
 
@@ -70,27 +65,30 @@ namespace AlignTag
 
         private void ArrangeTag(UIDocument uidoc, Transaction tx)
         {
-            Document doc = uidoc.Document;
-            View activeView = doc.ActiveView;
+          Document doc = uidoc.Document;
+          View activeView = doc.ActiveView;
 
-            //Check the current view
-            if (!activeView.CropBoxActive)
-            {
-                throw new ErrorMessageException("Please set a crop box to the view");
-            }
-
+          //Check the current view
+          if (!activeView.CropBoxActive)
+          {
+            var td = new TaskDialog("AlignTag");
+            td.MainInstruction = "Please set a crop box to the view";
+            td.Show();
+          }
+          else
+          {
             IEnumerable<IndependentTag> tags = from elem in new FilteredElementCollector(doc, activeView.Id).OfClass(typeof(IndependentTag)).WhereElementIsNotElementType()
-                                               let type = elem as IndependentTag
-                                               where type.HasLeader == true
-                                               select type;
+                                                let type = elem as IndependentTag
+                                                where type.HasLeader == true
+                                                select type;
 
             tx.Start("Prepare Tags");
 
             //Remove all leader to find the correct tag height and width
             foreach (IndependentTag tag in tags)
             {
-                tag.LeaderEndCondition = LeaderEndCondition.Free;
-                tag.LeaderEnd = tag.TagHeadPosition;
+              tag.LeaderEndCondition = LeaderEndCondition.Free;
+              tag.LeaderEnd = tag.TagHeadPosition;
             }
 
 
@@ -104,15 +102,15 @@ namespace AlignTag
 
             foreach (IndependentTag tag in tags)
             {
-                TagLeader currentTag = new TagLeader(tag, doc);
-                if (currentTag.Side == ViewSides.Left)
-                {
-                    leftTagLeaders.Add(currentTag);
-                }
-                else
-                {
-                    rightTagLeaders.Add(currentTag);
-                }
+              TagLeader currentTag = new TagLeader(tag, doc);
+              if (currentTag.Side == ViewSides.Left)
+              {
+                leftTagLeaders.Add(currentTag);
+              }
+              else
+              {
+                rightTagLeaders.Add(currentTag);
+              }
             }
 
             //Create a list of potential location points for tag headers
@@ -135,7 +133,7 @@ namespace AlignTag
             PlaceAndSort(rightTagHeadPoints, rightTagLeaders);
 
             tx.Commit();
-
+          }
         }
 
         private void PlaceAndSort(List<XYZ> positionPoints,List<TagLeader> tags)

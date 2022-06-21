@@ -33,7 +33,8 @@ namespace Align.Test
             Console.WriteLine($"Run 'TearDown' in {GetType().Name}");
         }
 
-        [Test]
+        [Test
+            ]
         public void AlignTagLeft()
         {
             int[] ids = new int[] { 201324, 201325, 201326, 201327 };
